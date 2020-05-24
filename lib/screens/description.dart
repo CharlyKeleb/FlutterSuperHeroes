@@ -28,9 +28,12 @@ class _HeroDetailsState extends State<HeroDetails> {
             ),
             expandedHeight: 220,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                widget.hero.images.lg,
-                fit: BoxFit.cover,
+              background: Hero(
+                tag: widget.hero.images.lg,
+                child: Image.network(
+                  widget.hero.images.lg,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -185,13 +188,19 @@ class Appearance extends StatelessWidget {
           title: Text(
             'Height'.toUpperCase(),
           ),
-          subtitle: Text(hero.appearance.height.toString()),
+          subtitle: Text(hero.appearance.height
+              .toString()
+              .replaceAll("[", "")
+              .replaceAll("]", "")),
         ),
         ListTile(
           title: Text(
             'Weight'.toUpperCase(),
           ),
-          subtitle: Text(hero.appearance.weight.toString()),
+          subtitle: Text(hero.appearance.weight
+              .toString()
+              .replaceAll("[", "")
+              .replaceAll("]", "")),
         ),
         ListTile(
           title: Text(
@@ -239,7 +248,8 @@ class Biography extends StatelessWidget {
           title: Text(
             'Aliases'.toUpperCase(),
           ),
-          subtitle: Text(hero.biography.aliases),
+          subtitle: Text(
+              hero.biography.aliases.replaceAll("[", "").replaceAll("]", "")),
         ),
         ListTile(
           title: Text(

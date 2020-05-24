@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:superhero_app/model/superhero.dart';
 import 'package:superhero_app/screens/description.dart';
+import 'package:superhero_app/search.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -45,7 +46,6 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          elevation: 3.0,
           title: Center(
             child: Text(
               'SuperHeroes',
@@ -59,53 +59,72 @@ class _MainScreenState extends State<MainScreen> {
                   color: Theme.of(context).accentColor,
                 ),
                 iconSize: 25,
-                onPressed: () {})
+                onPressed: () {
+                  superHero == null
+                      ? print("Chill")
+                      : showSearch(
+                    context: context,
+                    delegate: HeroSearch(all: superHero),
+                  );
+                })
           ],
         ),
         body: Center(
           child: loading
               ? Center(child: CircularProgressIndicator())
               : Padding(
-                padding: const EdgeInsets.symmetric(vertical:10.0),
-                child: GridView.builder(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: GridView.builder(
                     itemCount: superHero.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 1.8 / 2.3,
                     ),
                     itemBuilder: (BuildContext context, int index) {
-                      SuperHero superhero = SuperHero.fromJson(superHero[index]);
+                      SuperHero superhero =
+                          SuperHero.fromJson(superHero[index]);
                       return Column(
                         children: <Widget>[
                           InkWell(
-                            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_) => HeroDetails(hero: superhero,)));},
-                            child: Container(
-                              height: 200,
-                              width: 150,
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10)),
-                                elevation: 5,
-                                child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    child: Image.network(
-                                      superhero.images.lg,
-                                      fit: BoxFit.cover,
-                                    )),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) => HeroDetails(
+                                            hero: superhero,
+                                          )));
+                            },
+                            child: Hero(
+                              tag: superhero.images.lg,
+                              child: Container(
+                                height: 200,
+                                width: 150,
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 5,
+                                  child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      child: Image.network(
+                                        superhero.images.lg,
+                                        fit: BoxFit.cover,
+                                      )),
+                                ),
                               ),
                             ),
                           ),
                           Text(
                             superhero.name,
-                            style:
-                                TextStyle(color: Theme.of(context).accentColor, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                color: Theme.of(context).accentColor,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       );
                     },
                   ),
-              ),
+                ),
         ));
   }
 }
