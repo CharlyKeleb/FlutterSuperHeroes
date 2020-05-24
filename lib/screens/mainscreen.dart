@@ -58,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
                   Feather.search,
                   color: Theme.of(context).accentColor,
                 ),
-                iconSize: 30,
+                iconSize: 25,
                 onPressed: () {})
           ],
         ),
