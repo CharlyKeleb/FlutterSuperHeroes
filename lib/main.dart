@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'SuperHero App',
       debugShowCheckedModeBanner: false,
       home: MainScreen(),
-      theme:  Constants.lightTheme,
+      theme:  Constants.darkTheme,
     );
   }
 }
