@@ -16,9 +16,9 @@ Star⭐ the repo if you like what you see😉.
 
 | Light| Dark|
 |------|-------|
-|<img src="ss/flutter_04.png" width="400">|<img src="ss/flutter_01.png" width="400">|
-|<img src="ss/flutter_05.png" width="400">|<img src="ss/flutter_02.png" width="400">|
-|<img src="ss/flutter_06.png" width="400">|<img src="ss/flutter_03.png" width="400">|
+|<img src="lib/ss/flutter_04.png" width="400">|<img src="lib/ss/flutter_01.png" width="400">|
+|<img src="lib/ss/flutter_05.png" width="400">|<img src="lib/ss/flutter_02.png" width="400">|
+|<img src="lib/ss/flutter_06.png" width="400">|<img src="lib/ss/flutter_03.png" width="400">|
 
 
 
