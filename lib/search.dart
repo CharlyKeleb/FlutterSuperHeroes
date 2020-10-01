@@ -8,7 +8,6 @@ class HeroSearch extends SearchDelegate {
   HeroSearch({@required this.all});
 
   @override
-
   ThemeData appBarTheme(BuildContext context) {
     assert(context != null);
     final ThemeData theme = Theme.of(context);
@@ -100,11 +99,13 @@ class HeroSearch extends SearchDelegate {
                           width: 150,
                           child: Card(
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             elevation: 5,
                             child: ClipRRect(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10),
+                              ),
                               child: Image.network(
                                 superhero.images.lg,
                                 fit: BoxFit.cover,
