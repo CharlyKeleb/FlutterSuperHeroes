@@ -37,39 +37,25 @@ class _HeroDetailsState extends State<HeroDetails> {
               ),
             ),
           ),
-          SliverList(delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            if (index > 0) return null;
-            return Column(
-              children: <Widget>[
-                PowerStats(hero: widget.hero),
-                Divider(
-                  thickness: 1,
-                ),
-                Appearance(
-                  hero: widget.hero,
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Biography(
-                  hero: widget.hero,
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Work(
-                  hero: widget.hero,
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                Connections(
-                  hero: widget.hero,
-                ),
-              ],
-            );
-          }))
+          SliverList(
+            delegate:
+                SliverChildBuilderDelegate((BuildContext context, int index) {
+              if (index > 0) return null;
+              return Column(
+                children: <Widget>[
+                  PowerStats(hero: widget.hero),
+                  Divider(thickness: 1),
+                  Appearance(hero: widget.hero),
+                  Divider(thickness: 1),
+                  Biography(hero: widget.hero),
+                  Divider(thickness: 1),
+                  Work(hero: widget.hero),
+                  Divider(thickness: 1),
+                  Connections(hero: widget.hero),
+                ],
+              );
+            }),
+          )
         ],
       ),
     );
