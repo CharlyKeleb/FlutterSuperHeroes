@@ -18,15 +18,14 @@ class _MyAppState extends State<MyApp> {
     return ChangeNotifierProvider(
       create: (_) => ThemeNotifier(),
       child: Consumer<ThemeNotifier>(
-        builder: (context, ThemeNotifier notifier, child){
-          return  MaterialApp(
+        builder: (context, ThemeNotifier notifier, child) {
+          return MaterialApp(
             title: 'SuperHero App',
             debugShowCheckedModeBanner: false,
             home: MainScreen(),
             theme: notifier.dark ? Constants.darkTheme : Constants.lightTheme,
           );
         },
-
       ),
     );
   }

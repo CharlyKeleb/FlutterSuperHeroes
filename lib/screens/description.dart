@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:superhero_app/model/superhero.dart';
 
@@ -30,9 +32,29 @@ class _HeroDetailsState extends State<HeroDetails> {
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
                 tag: widget.hero.images.lg,
-                child: Image.network(
-                  widget.hero.images.lg,
-                  fit: BoxFit.cover,
+                child: CachedNetworkImage(
+                  imageUrl: widget.hero.images.lg,
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  placeholder: (context, url) => Center(
+                    child: Center(
+                      child: SpinKitRipple(
+                        size: 50,
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Center(
+                    child: Icon(
+                      Icons.sentiment_very_dissatisfied,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -76,70 +98,74 @@ class PowerStats extends StatelessWidget {
       ),
       children: <Widget>[
         ListTile(
-            title: Text("Intelligence".toUpperCase() +
-                "  ${hero.powerstats.intelligence}%"),
-            subtitle: LinearPercentIndicator(
-              animation: true,
-              lineHeight: 15.0,
-              animationDuration: 2500,
-              percent: hero.powerstats.intelligence.toDouble() / 100.0,
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: Colors.blue,
-            )),
+          title: Text("Intelligence".toUpperCase() +
+              "  ${hero.powerstats.intelligence}%"),
+          subtitle: LinearPercentIndicator(
+            animation: true,
+            lineHeight: 15.0,
+            animationDuration: 2500,
+            percent: hero.powerstats.intelligence.toDouble() / 100.0,
+            linearStrokeCap: LinearStrokeCap.roundAll,
+            progressColor: Colors.blue,
+          ),
+        ),
         ListTile(
-            title: Text(
-                'Strength'.toUpperCase() + "  ${hero.powerstats.strength}%"),
-            subtitle: LinearPercentIndicator(
-              animation: true,
-              lineHeight: 15.0,
-              animationDuration: 2500,
-              percent: hero.powerstats.strength.toDouble() / 100.0,
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: Colors.green,
-            )),
+          title:
+              Text('Strength'.toUpperCase() + "  ${hero.powerstats.strength}%"),
+          subtitle: LinearPercentIndicator(
+            animation: true,
+            lineHeight: 15.0,
+            animationDuration: 2500,
+            percent: hero.powerstats.strength.toDouble() / 100.0,
+            linearStrokeCap: LinearStrokeCap.roundAll,
+            progressColor: Colors.green,
+          ),
+        ),
         ListTile(
-            title: Text('Speed'.toUpperCase() + "  ${hero.powerstats.speed}%"),
-            subtitle: LinearPercentIndicator(
-              animation: true,
-              lineHeight: 15.0,
-              animationDuration: 2500,
-              percent: hero.powerstats.speed.toDouble() / 100.0,
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: Theme.of(context).accentColor,
-            )),
+          title: Text('Speed'.toUpperCase() + "  ${hero.powerstats.speed}%"),
+          subtitle: LinearPercentIndicator(
+            animation: true,
+            lineHeight: 15.0,
+            animationDuration: 2500,
+            percent: hero.powerstats.speed.toDouble() / 100.0,
+            linearStrokeCap: LinearStrokeCap.roundAll,
+            progressColor: Theme.of(context).accentColor,
+          ),
+        ),
         ListTile(
-            title: Text(
-              'Durability'.toUpperCase(),
-            ),
-            subtitle: LinearPercentIndicator(
-              animation: true,
-              lineHeight: 15.0,
-              animationDuration: 2500,
-              percent: hero.powerstats.durability.toDouble() / 100.0,
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: Colors.red,
-            )),
+          title: Text('Durability'.toUpperCase()),
+          subtitle: LinearPercentIndicator(
+            animation: true,
+            lineHeight: 15.0,
+            animationDuration: 2500,
+            percent: hero.powerstats.durability.toDouble() / 100.0,
+            linearStrokeCap: LinearStrokeCap.roundAll,
+            progressColor: Colors.red,
+          ),
+        ),
         ListTile(
-            title: Text('Power'.toUpperCase() + "  ${hero.powerstats.power}%"),
-            subtitle: LinearPercentIndicator(
-              animation: true,
-              lineHeight: 15.0,
-              animationDuration: 2500,
-              percent: hero.powerstats.power.toDouble() / 100.0,
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: Colors.purple,
-            )),
+          title: Text('Power'.toUpperCase() + "  ${hero.powerstats.power}%"),
+          subtitle: LinearPercentIndicator(
+            animation: true,
+            lineHeight: 15.0,
+            animationDuration: 2500,
+            percent: hero.powerstats.power.toDouble() / 100.0,
+            linearStrokeCap: LinearStrokeCap.roundAll,
+            progressColor: Colors.purple,
+          ),
+        ),
         ListTile(
-            title: Text(
-                'Combat'.toUpperCase() + "  ${hero.powerstats.intelligence}%"),
-            subtitle: LinearPercentIndicator(
-              animation: true,
-              lineHeight: 15.0,
-              animationDuration: 2500,
-              percent: hero.powerstats.combat.toDouble() / 100.0,
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              progressColor: Colors.amber,
-            )),
+          title: Text(
+              'Combat'.toUpperCase() + "  ${hero.powerstats.intelligence}%"),
+          subtitle: LinearPercentIndicator(
+            animation: true,
+            lineHeight: 15.0,
+            animationDuration: 2500,
+            percent: hero.powerstats.combat.toDouble() / 100.0,
+            linearStrokeCap: LinearStrokeCap.roundAll,
+            progressColor: Colors.amber,
+          ),
+        ),
       ],
     );
   }
@@ -282,12 +308,13 @@ class Work extends StatelessWidget {
           subtitle: Text(hero.work.occupation),
         ),
         ListTile(
-            title: Text(
-              'Base'.toUpperCase(),
-            ),
-            subtitle: Text(
-              (hero.work.base),
-            ))
+          title: Text(
+            'Base'.toUpperCase(),
+          ),
+          subtitle: Text(
+            (hero.work.base),
+          ),
+        )
       ],
     );
   }
