@@ -5,6 +5,7 @@ import 'dart:convert';
 
 import 'package:superhero_app/model/superhero.dart';
 import 'package:superhero_app/screens/description.dart';
+import 'package:superhero_app/screens/settings.dart';
 import 'package:superhero_app/search.dart';
 
 class MainScreen extends StatefulWidget {
@@ -67,7 +68,13 @@ class _MainScreenState extends State<MainScreen> {
                           context: context,
                           delegate: HeroSearch(all: superHero),
                         );
-                })
+                }),
+            IconButton(icon: Icon(Feather.settings), onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => Settings(
+                ),
+              ));
+            })
           ],
         ),
         body: Center(

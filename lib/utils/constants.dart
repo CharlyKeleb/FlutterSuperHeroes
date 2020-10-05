@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Constants{
-
+class Constants {
   //App related strings
   static String appName = "SuperHero App";
-
 
   //Colors for theme
   static Color lightPrimary = Color(0xfff3f4f9);
@@ -17,7 +16,7 @@ class Constants{
   static ThemeData lightTheme = ThemeData(
     backgroundColor: lightBG,
     primaryColor: lightPrimary,
-    accentColor:  lightAccent,
+    accentColor: lightAccent,
     cursorColor: lightAccent,
     scaffoldBackgroundColor: lightBG,
     appBarTheme: AppBarTheme(
@@ -51,7 +50,6 @@ class Constants{
     ),
   );
 
-
   static List<T> map<T>(List list, Function handler) {
     List<T> result = [];
     for (var i = 0; i < list.length; i++) {
@@ -59,5 +57,36 @@ class Constants{
     }
 
     return result;
+  }
+}
+
+class ThemeNotifier extends ChangeNotifier {
+  final String key = 'theme';
+  SharedPreferences _prefs;
+  bool _darkTheme;
+  bool get dark => _darkTheme;
+
+  ThemeNotifier() {
+    _darkTheme = true;
+    _loadfromPrefs();
+  }
+  toggleTheme(){
+    _darkTheme = !_darkTheme;
+    _saveToPrefs();
+    notifyListeners();
+  }
+
+  _initPrefs()async{
+    if(_prefs == null)
+      _prefs = await SharedPreferences.getInstance();
+  }
+  _loadfromPrefs()async{
+    await _initPrefs();
+    _darkTheme = _prefs.getBool(key) ?? true;
+    notifyListeners();
+  }
+  _saveToPrefs()async{
+    await _initPrefs();
+    _prefs.setBool(key, _darkTheme);
   }
 }
